@@ -2,25 +2,12 @@
 
 ### Assignment 1
 
-**OMG You're AMAZING**
+**OMG You're AMAZING.** Thanks for your assignment submissions, I hope it was fun!
 
 ---
 
 
 Congratulations, you've made it to the git repository for our seventh lesson. Hopefully you also made it to the class and some of this makes sense to you.
-
-Check our RESOURCES.md for some links we think you'll find handy.
-
-
-## Homework Checklist
-
-- [ ] [Fork this repository][gh-fork]
-- [ ] Clone the repo to your own machine
-- [ ] Use the virtualenv you created in previous lesson
-
-When you've completed some or all of the homework please make a [Pull Request][gh-pr] against this repository. If you submit your work before Wednesday evening we'll give you feedback before the next class.
-
-If you'd like help, make a Pull Request with your incomplete work and ask a question to @darrenfrenkel, @sesh, @funkybob or @MarkusH
 
 
 ## Displaying the class slides
