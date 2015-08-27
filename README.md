@@ -1,4 +1,4 @@
-# MelbDjango School Lesson Six
+# MelbDjango School Lesson Seven
 
 ### Assignment 1
 
