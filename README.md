@@ -1,8 +1,10 @@
 # MelbDjango School Lesson Seven
 
-### Assignment 1
+### The "Project"
 
 **OMG You're AMAZING.** Thanks for your assignment submissions, I hope it was fun!
+
+Our [project][project] outline is online now. Make something awesome.
 
 ---
 
@@ -29,3 +31,4 @@ From within the `lesson-six` repo:
 [gh-pr]: https://help.github.com/articles/using-pull-requests/
 [dj-request-response]: https://docs.djangoproject.com/en/1.8/ref/request-response/
 [mdn-html]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Introduction
+[project]: https://github.com/MelbDjango/melbdjango-project
