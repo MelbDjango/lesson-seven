@@ -1,6 +1,6 @@
 ## MelbDjango School
 
-### Lesson Seven — Authentication & APIs
+### Lesson Seven — APIs
 
 ---
 
@@ -14,67 +14,20 @@ Thanks for doing the assignment!
 
 ---
 
-django.contrib.auth
-
-- Installed by default
-- Add `django.contrib.auth` to your installed apps if it's not
-- You need to migrate to create the models in the database
-
----
-
-django.contrib.auth.models.User
-
----
-
-You can create your own user model
-
----
-
-Creating users
-
----
-
-Logging a user in
-
-- authenticate(username="", password="")
-- login(request, user)
-
-- You _must_ call authenticate first
-
----
-
-Logging a user out
-
-- A whole heap simpler, since Django just clears the session data.
-- logout(request)
-
----
-
-Checking if the user is logged in
-
-- request.user.is_authenticated()
-- from django.contrib.auth.decorators.login_required
-
----
-
-A note about changing password
-
-- user set_password()
-
-
----
-
-Django provides views to do most of these tasks
-
----
-
-Creating Foreign Keys to Users
-
-
-
----
-
 # Building JSON APIs with Django
+
+---
+
+## What does "interface" mean?
+
+---
+
+## What does "interface" mean?
+
+<dl>
+<dt>interface (plural interfaces)</dt>
+<dd>The point of interconnection between entities.</dd>
+</dl>
 
 ---
 
@@ -89,12 +42,16 @@ Creating Foreign Keys to Users
 
 ## Why we bulid APIs
 
-- Websites use APIs to create more dynamic front ends
-  - Instead of rendering templates on the server, you make calls to the API with javascript
+Old sites:
+- Server rendered content.
+- Every user click reloads the page.
+- A little JS (form validation, animations, etc).
 
-- A lot of websites (Github, Twitter, Instagram, Google, etc.) define APIs that let developers access data from them
-  - Normally there are `Application Keys` the identify the user for security reasons
-  - There are almost always rules around what you can and can't do with the data
+Modern sites:
+- Heavy JS usage.
+- Browser rendered content.
+- Dynamically update the current page 
+- Actions are performed "in the background".
 
 ---
 
@@ -114,6 +71,11 @@ Creating Foreign Keys to Users
   "id": 1,
   "title": "MelbDjango School - Lesson Seven",
   "teacher": "@sesh"
+  "classes": [
+    "lesson 1",
+    "lesson 4",
+    "lesson 9"
+  ]
 }
 ```
 
@@ -121,9 +83,41 @@ Creating Foreign Keys to Users
 
 ## Why JSON?
 
-- Why not XML, CSV, etc?
-  - We only have a single language (Javascript) available in the browser
-  - XML is ugly
+Why not XML, CSV, etc?
+
+- We only have a single language (Javascript) available in the browser.
+- JSON is "free" in the browser.
+- XML is a document markup language, not a data format.
+- XML is ugly.
+
+---
+
+## What does `RESTful` mean?
+
+`Representational state transfer`
+
+A design pattern for building scalable web services.
+
+- Designed for HTTP
+- Relies on HTTP verb semantics (GET, POST, etc)
+- Relies on URL/URIs
+- Uses HTTP status codes
+
+---
+
+## What does `RESTful` mean?
+
+- Records are addressable at URLs
+- To create/read/update/delete we use POST/GET/PUT/DELETE respectively.
+- Can reference other records by URL.
+
+---
+
+## Benefits of REST
+
+- Stateless
+- Cacheable
+- Layered
 
 ---
 
@@ -131,7 +125,7 @@ Creating Foreign Keys to Users
 
 - DRF
 - django-nap
-- tastypie
+- TastyPie
 - restless
 
 ---
@@ -140,37 +134,100 @@ Creating Foreign Keys to Users
 
 ---
 
-## JSONResponse
+## What does Django bring?
+
+`JsonResponse`
 
 - New in Django 1.7
-- Just like HTTPResponse, but it takes a dictionary
+- Subclass of HTTPResponse
+- Accepts a dict of data
+- Returns JSON encoded string
+
+Note: Why dict?  safe=False
 
 ---
 
-safe==False
+## Overview
 
-Well, that sounds kinda bad.
-
----
-
-Building a simple API for our Entries
-
----
-
-What about creating objects?
-POST
+- List views
+  - Get all records
+  - POST new records
+- Detail views
+  - Get a single record
+  - Update a single record
+  - Delete a single record
 
 ---
 
-Using forms in our API
+## A Mixin
+
+```
+from django.http import JsonResponse
+
+class JsonResponseMixin(object):
+    '''
+    A mixin mostly compatible with TemplateResponseMixin
+    '''
+
+    response_class = JsonResponse
+    content_type = 'application/json'
+
+    def render_to_response(self, context, **response_kwargs):
+        response_kwargs.setdefault('content_type', self.content_type)
+        return self.response_class(content, **response_kwargs)
+```
+
+[see](https://github.com/django/django/blob/master/django/views/generic/base.py#L112)
 
 ---
 
-Good REST API Design
+## List view
 
-- Return the right status code
+    from django.views.generic import ListView
+
+    from .models import Entry
+    from .utils import JsonResponseMixin
 
 
+    class EntryListView(JsonResponseMixin, ListView):
+        model = Entry
+
+
+---
+
+## Is that it??
+
+- Sadly, no.
+
+---
+
+## Oh...
+
+We need to "reduce" our Python objects to simple dicts of JSON types.
+
+This is generally called "serialising".
+
+---
+
+## Serialisers
+
+- Convert Python objects to simple types.
+- Convery data from requests back to Python objects.
+
+`django.core.serialisers`
+
+- Basic
+- Used for fixtures, dumpdata, loaddata
+- Inflexible
+
+---
+
+## Using forms in our API
+
+
+---
+
+![](https://raw.githubusercontent.com/CapnKernel/melbdjango-assignment/master/guestbook/static/img/agbdunderconstruction7.gif)
 
 
 
