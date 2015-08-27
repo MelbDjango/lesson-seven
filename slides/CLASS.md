@@ -40,7 +40,7 @@ Thanks for doing the assignment!
 
 ---
 
-## Why we bulid APIs
+## Why we build APIs
 
 Old sites:
 - Server rendered content.
@@ -70,7 +70,7 @@ Modern sites:
 {
   "id": 1,
   "title": "MelbDjango School - Lesson Seven",
-  "teacher": "@sesh"
+  "teacher": "@sesh",
   "classes": [
     "lesson 1",
     "lesson 4",
@@ -212,7 +212,7 @@ This is generally called "serialising".
 ## Serialisers
 
 - Convert Python objects to simple types.
-- Convery data from requests back to Python objects.
+- Convert data from requests back to Python objects.
 
 `django.core.serialisers`
 
